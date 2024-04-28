@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Express JS</title>
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>Express JS</section>
+				<section>What is Express?</section>
+				<section data-markdown>
+					<textarea data-template>
+					  ``` 
+					  $ npm install express
+					  ```
+					</textarea>
+				  </section>
+				  <section>Routing</section>
+				  <section data-markdown>
+					<textarea data-template>
+					  ```
+					  const express = require('express')
+					  const app = express()
+					  
+					  // respond with "hello world" when a GET request is made to the homepage
+					  app.get('/', (req, res) => {
+						res.send('hello world')
+					  })
+					  ```
+					</textarea>
+				  </section>
+				  <section data-markdown>
+					<textarea data-template>
+					  ```
+					  const express = require("express");
+					  const app = express();
+					  app.get("/", function(request, response){
+						  response.send("<h1>Main page</h1>");
+					  });
+					  app.get("/about", function(request, response){
+						  response.send("<h1>About</h1>");
+					  });
+					  app.get("/contact", function(request, response){
+						  response.send("<h1>Contacts</h1>");
+					  });
+					  app.listen(3000);
+					  ```
+					</textarea>
+				  </section>
+					<section data-markdown>
+						<textarea data-template>
+							```
+							const express = require("express");
+							const app = express();
+							app.use("/home/foo/bar",function (_, response) {
+							  response.sendStatus(404)
+							});
+							app.listen(3000);
+						  ```
+						</textarea>
+					  </section>
+					  <section>Redirect</section>
+					  <section data-markdown>
+						<textarea data-template>
+							```
+							const express = require("express");
+							const app = express();
+							 
+							app.use("/index",function (_, response) {
+							  response.redirect("https://metanit.com")
+							});
+							 
+							app.listen(3000);
+						  ```
+						</textarea>
+					  </section>
+					  <section data-markdown>
+						<textarea data-template>
+							```
+							const express = require("express");
+							const app = express();
+							 
+							app.use("/home",function (_, response) {
+							  response.redirect("about")
+							});
+							app.use("/about", function (_, response) {
+							  response.send("<h1>About</h1>");
+							});
+							 
+							app.listen(3000);
+						  ```
+						</textarea>
+					  </section>
+					  <section>Query params</section>
+					  <section data-markdown>
+						<textarea data-template>
+							```
+							const express = require("express");
+  
+							const app = express();
+							app.get("/", function(_, response){
+								  
+								response.send("<h1>Main</h1>");
+							});
+							app.use("/about", function(request, response){
+								  
+								const id = request.query.id;
+								const userName = request.query.name;
+								response.send(`<h1>Info</h1><p>id: ${id}</p><p>name: ${userName}</p>`);
+							});
+							 
+							app.listen(3000);
+						  ```
+						</textarea>
+					  </section>
+					  <section>Thanks for watching!</section>
+			</div>
+		</div>
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			Reveal.initialize({
+				hash: true,
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
